@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#090b13">
+  <meta name="description" content="WMMT3DX+ mobile-themed interactive download experience. Allannn-sudo and Nxy editions.">
+  <title>WMMT3DX+ // MOBILE ARCHIVE</title>
+  <style>
+    :root {
+      --bg: #080a11;
+      --bg2: #0f1220;
+      --card: #121522;
+      --line: rgba(170, 204, 235, .15);
+      --text: #f3f7ff;
+      --sub: #a2a8ba;
+      --muted: #747d94;
+      --cyan: #42ecf5;
+      --pink: #ff5d91;
+      --gold: #f5bb6b;
+      --green: #9effc2;
+      --font: 'Inter', 'SF Pro Display', 'Noto Sans TC', 'Noto Sans JP', 'Segoe UI', Arial, sans-serif;
+      --display: 'Arial Narrow', 'Bahnschrift SemiCondensed', 'Impact', 'Noto Sans', sans-serif;
+    }
+    *, *::before, *::after {box-sizing: border-box}
+    html {scroll-behavior: smooth}
+    body {margin:0; min-width:320px; background:var(--bg); color:var(--text); font-family:var(--font); font-size:15px; -webkit-font-smoothing: antialiased; overflow-x:hidden}
+    body.locked {overflow:hidden}
+    ::selection {color:#060d15; background:var(--cyan)}
+    button, select {font:inherit}
+    button {cursor:pointer}
+    a {color:inherit; text-decoration:none}
+    button:focus-visible, select:focus-visible, a:focus-visible {outline:2px solid var(--cyan); outline-offset:4px}
+    [hidden] {display:none!important}
+    .wrap {width:min(1200px,calc(100% - 64px)); margin:0 auto}
+    .site-noise {position:fixed; inset:0; z-index:30; pointer-events:none; opacity:.075; background-image:url('data:image/svg+xml,%3Csvg viewBox=%220 0 180 180%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%22.25%22/%3E%3C/svg%3E')}
+    .top-accent {height:3px; background:linear-gradient(90deg,var(--cyan),#618aff 49%,var(--pink))}
+    .site-header {height:84px; border-bottom:1px solid rgba(255,255,255,.065); position:relative; z-index:15; background:rgba(8,10,17,.85); backdrop-filter:blur(16px)}
+    .header-inner {height:100%; display:flex; align-items:center; justify-content:space-between; gap:22px}
+    .brand {display:flex; align-items:center; gap:12px; white-space:nowrap; flex-shrink:0}
+    .brand-mark {width:37px; height:37px; border:1px solid rgba(66,236,245,.8); transform:skew(-13deg); display:grid; place-items:center; box-shadow:4px 4px 0 rgba(66,236,245,.14); color:var(--cyan); font-size:18px; font-weight:1000; letter-spacing:-3px; padding-right:4px}
+    .brand-copy {display:flex; flex-direction:column; gap:2px}
+    .brand-title {font-size:17px; font-weight:950; letter-spacing:.045em}
+    .brand-title span {color:var(--cyan)}
+    .brand-sub {font:650 9px var(--font); letter-spacing:.32em; color:var(--muted)}
+    .header-nav {display:flex; gap:34px; align-items:center; margin-left:auto; margin-right:16px}
+    .header-nav a {text-transform:uppercase; font-size:11px; font-weight:800; letter-spacing:.15em; color:#b2b7c7; transition:color .2s}
+    .header-nav a:hover {color:var(--cyan)}
+    .lang-control {position:relative; display:flex; align-items:center; gap:8px; padding:0 12px; min-height:40px; border:1px solid var(--line); background:#151927; border-radius:4px}
+    .lang-control svg {width:15px; height:15px; stroke:var(--cyan); flex-shrink:0}
+    .lang-control select {appearance:none; background:transparent; border:0; color:var(--text); outline:none; font-size:11px; font-weight:750; letter-spacing:.045em; padding:0 18px 0 0; cursor:pointer; max-width:113px}
+    .lang-control select option {background:#101420; color:white}
+    .select-caret {position:absolute; right:12px; font-size:11px; color:#b6c4dc; pointer-events:none}
+    .hero {min-height:645px; position:relative; isolation:isolate; overflow:hidden; background:radial-gradient(ellipse at 76% 38%, rgba(29,73,112,.24), transparent 42%), radial-gradient(ellipse at 78% 83%,rgba(221,49,112,.12),transparent 35%),#090b14}
+    .hero::before {content:""; position:absolute; inset:0; opacity:.26; z-index:-1; background-image:linear-gradient(rgba(85,124,158,.12) 1px, transparent 1px),linear-gradient(90deg,rgba(85,124,158,.12) 1px, transparent 1px); background-size:68px 68px; mask-image:linear-gradient(90deg, transparent, black 55%, black)}
+    .hero::after {content:""; position:absolute; height:450px; width:860px; right:-150px; bottom:-380px; border-radius:50%; background:#40dce4; filter:blur(110px); opacity:.14; z-index:-1}
+    .hero-inner {min-height:645px; display:grid; grid-template-columns:1.03fr .97fr; align-items:center; gap:20px; position:relative; padding-top:36px; padding-bottom:55px}
+    .hero-content {position:relative; z-index:3}
+    .eyebrow {display:flex; align-items:center; gap:12px; color:var(--cyan); text-transform:uppercase; font-size:11px; font-weight:850; letter-spacing:.31em}
+    .eyebrow:before {content:""; width:29px; height:1px; background:var(--cyan)}
+    .hero-title {font:900 clamp(75px,10vw,154px)/.83 var(--display); transform:scaleX(.9); transform-origin:left center; letter-spacing:-.065em; margin:30px 0 19px; text-shadow:0 15px 45px rgba(0,0,0,.26)}
+    .hero-title span {display:block}
+    .hero-title .second {color:transparent; -webkit-text-stroke:2px rgba(241,249,255,.91); text-shadow:none; margin-top:6px}
+    .hero-title .plus {color:var(--pink); -webkit-text-stroke:0; display:inline; filter:drop-shadow(0 0 22px rgba(255,93,145,.4))}
+    .hero-tagline {font-size:clamp(21px,2.35vw,31px); line-height:1.3; letter-spacing:.01em; font-weight:850; margin:25px 0 14px; max-width:560px}
+    .hero-tagline .accent-word {color:var(--cyan)}
+    .hero-description {color:#aeb8c8; font-size:14px; line-height:1.85; max-width:470px; margin:0 0 32px}
+    .hero-actions {display:flex; gap:18px; align-items:center; flex-wrap:wrap}
+    .primary-cta {min-height:54px; display:inline-flex; align-items:center; justify-content:center; gap:25px; padding:0 24px; background:var(--cyan); color:#07121d; font-weight:950; font-size:12px; letter-spacing:.11em; text-transform:uppercase; transform:skew(-9deg); transition:background .2s, box-shadow .2s,transform .2s}
+    .primary-cta span,.primary-cta svg {transform:skew(9deg)}
+    .primary-cta:hover {background:#b6feff; box-shadow:0 0 38px rgba(66,236,245,.27); transform:skew(-9deg) translateY(-2px)}
+    .primary-cta svg {width:18px; height:18px}
+    .hero-hint {font-size:10px; color:#a6b0c5; letter-spacing:.16em; text-transform:uppercase; display:flex; align-items:center; gap:10px}
+    .hero-hint:before {content:""; display:block; width:6px; height:6px; border-radius:50%; background:var(--green); box-shadow:0 0 13px var(--green)}
+    .hero-art {position:relative; min-height:520px; display:grid; place-items:center; isolation:isolate}
+    .art-halo {position:absolute; width:440px; height:440px; border-radius:50%; border:1px solid rgba(84,210,246,.13); box-shadow:0 0 0 36px rgba(52,165,222,.025),0 0 0 80px rgba(52,165,222,.018); transform:rotate(-19deg)}
+    .art-halo::before,.art-halo::after {content:""; position:absolute; border-radius:50%; inset:44px; border:1px dashed rgba(77,209,241,.23)}
+    .art-halo::after {inset:115px; border-style:solid; border-color:rgba(255,88,145,.22)}
+    .side-number {position:absolute; top:22px; right:1%; color:rgba(142,171,212,.15); font:900 125px/.8 var(--display); letter-spacing:-.07em; transform:skew(-12deg)}
+    .speed-arc {position:absolute; width:520px; height:520px; border:3px solid transparent; border-top-color:rgba(64,229,241,.8); border-left-color:rgba(255,84,145,.27); border-radius:50%; transform:rotate(-55deg); filter:drop-shadow(0 0 13px rgba(64,229,241,.25)); animation:rotate-rim 20s linear infinite}
+    .speed-arc:after {content:""; position:absolute; width:10px; height:10px; background:var(--cyan); border-radius:50%; top:87px; left:66px; box-shadow:0 0 20px var(--cyan)}
+    .device {position:relative; width:256px; height:468px; border-radius:37px; transform:rotate(12deg) skewY(-2deg); border:6px solid #202a3a; background:#050812; box-shadow:0 0 0 2px #43566e,17px 30px 60px rgba(0,0,0,.65),-18px 0 75px rgba(49,181,236,.18); z-index:2; overflow:hidden; animation:levitate 6s ease-in-out infinite}
+    .device::after {content:""; position:absolute; inset:0; border-radius:30px; box-shadow:inset 0 0 30px rgba(0,0,0,.6); pointer-events:none}
+    .device-notch {position:absolute; top:11px; left:50%; transform:translateX(-50%); z-index:3; height:20px; width:87px; background:#050811; border-radius:20px; border:1px solid #17243a}
+    .device-screen {position:absolute; inset:3px; border-radius:28px; overflow:hidden; background:radial-gradient(ellipse at 54% 20%,rgba(62,154,198,.42),transparent 45%),linear-gradient(165deg,#071b31 8%,#0a142a 50%,#230d2d 100%)}
+    .night-city {position:absolute; inset:26% -8% 0; background:linear-gradient(transparent 42%, rgba(2,6,18,.9) 42%), repeating-linear-gradient(90deg, transparent 0 8px, rgba(35,76,106,.45) 8px 19px, transparent 19px 27px); clip-path:polygon(0 49%,5% 49%,5% 37%,14% 37%,14% 45%,21% 45%,21% 21%,30% 21%,30% 37%,36% 37%,36% 8%,42% 8%,42% 35%,49% 35%,49% 26%,57% 26%,57% 39%,65% 39%,65% 15%,75% 15%,75% 44%,83% 44%,83% 26%,92% 26%,92% 48%,100% 48%,100% 100%,0 100%); opacity:.76}
+    .road {position:absolute; height:63%; width:195%; left:-48%; bottom:-22%; background:repeating-linear-gradient(90deg, transparent 0 49%, rgba(255,246,203,.75) 49.2% 49.7%, transparent 49.9% 100%),linear-gradient(90deg,transparent 0 48.7%,rgba(40,95,139,.9) 49%,#0a1423 50%,rgba(40,95,139,.7) 51%,transparent 100%); clip-path:polygon(48% 0,52% 0,100% 100%,0 100%); filter:blur(.35px)}
+    .horizon {position:absolute; left:0; right:0; top:53%; height:3px; background:linear-gradient(90deg,transparent,var(--pink),var(--cyan),transparent); box-shadow:0 0 20px #ff5d91}
+    .device-topline {position:absolute; z-index:1; left:20px; top:43px; color:#a0f8ff; font:750 8px var(--font); letter-spacing:.25em}
+    .device-speed {position:absolute; z-index:2; top:115px; left:23px; font:900 65px/.9 var(--display); letter-spacing:-.07em; color:white; text-shadow:0 3px 24px rgba(40,224,245,.45)}
+    .device-speed small {font:600 10px var(--font); letter-spacing:.12em; display:block; color:#95f6ff; margin:11px 0 0 5px}
+    .device-footer {position:absolute; bottom:38px; left:18px; right:18px; border-top:1px solid rgba(255,255,255,.3); padding-top:11px; display:flex; justify-content:space-between; gap:4px; font-size:9px; letter-spacing:.1em; font-weight:900; color:#fff; z-index:1}
+    .art-chip {position:absolute; z-index:4; border:1px solid rgba(89,222,244,.37); background:rgba(11,24,39,.78); backdrop-filter:blur(12px); padding:14px 17px; box-shadow:0 14px 40px #0007}
+    .art-chip small {display:block; color:#849bb8; font-size:9px; letter-spacing:.2em; font-weight:850; margin-bottom:4px}
+    .art-chip strong {font:900 22px var(--display); color:#effdff}
+    .art-chip-a {top:86px; left:3%; transform:rotate(-9deg)}
+    .art-chip-b {right:-2%; bottom:84px; transform:rotate(5deg); border-color:rgba(255,94,147,.44)}
+    .art-chip-b strong {color:var(--pink)}
+    .hero-bottom {height:58px; position:absolute; bottom:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(255,255,255,.085); color:#697e9a; font-size:10px; font-weight:800; letter-spacing:.17em; text-transform:uppercase}
+    .hero-bottom b {color:var(--cyan)}
+    .hero-bottom .bars {letter-spacing:3px; color:#5ca3b4}
+    .ticker {border-top:1px solid rgba(66,236,245,.12); border-bottom:1px solid rgba(66,236,245,.12); background:#0c111d; overflow:hidden; white-space:nowrap; height:47px; display:flex; align-items:center}
+    .ticker-text {display:inline-block; white-space:nowrap; min-width:max-content; animation:marquee 38s linear infinite; font-size:11px; color:#7593ae; letter-spacing:.3em; font-weight:850}
+    .ticker-text .star {font-size:15px; color:var(--cyan); padding:0 36px}
+    .releases {position:relative; padding:107px 0 125px; background:radial-gradient(ellipse at 10% 58%,rgba(50,79,142,.11),transparent 34%),linear-gradient(#090c14,#0a0c14)}
+    .section-top {display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:54px}
+    .section-kicker {color:var(--cyan); font-size:10px; font-weight:850; letter-spacing:.27em; margin-bottom:19px; display:block}
+    .section-heading {margin:0; font:900 clamp(43px,6vw,70px)/.98 var(--display); letter-spacing:-.035em; text-transform:uppercase}
+    .section-heading em {font-style:normal; color:var(--cyan)}
+    .section-desc {margin:16px 0 0; color:#99a3b7; font-size:13px; line-height:1.8; max-width:520px}
+    .section-counter {color:#465672; font:900 70px/.8 var(--display); letter-spacing:-.1em; white-space:nowrap}
+    .release-group {margin-bottom:74px}
+    .group-head {display:flex; align-items:flex-end; justify-content:space-between; gap:25px; margin-bottom:22px}
+    .group-heading {display:flex; align-items:center; flex-wrap:wrap; gap:16px}
+    .group-no {font:900 12px var(--font); color:var(--cyan); border:1px solid #2f7285; display:grid; place-items:center; width:32px; height:32px; transform:skew(-10deg)}
+    .group-name {font:900 30px var(--display); letter-spacing:.025em; margin:0}
+    .group-type {font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.18em; font-weight:850; border-left:1px solid #3d465a; padding-left:16px}
+    .device-tabs {display:flex; padding:4px; background:#141a29; border:1px solid #293148; border-radius:5px; gap:4px}
+    .device-tab {min-width:104px; padding:10px 15px; border:0; border-radius:3px; background:transparent; color:#8593ab; font-size:11px; font-weight:850; letter-spacing:.09em; transition:background .2s,color .2s}
+    .device-tab.active {background:var(--cyan); color:#07121d; box-shadow:0 3px 15px #42ecf51c}
+    .version-grid {display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px}
+    .version-card {min-height:242px; padding:23px 23px 19px; background:linear-gradient(156deg,#161c2b 0%,#10131f 80%); border:1px solid rgba(145,171,214,.16); position:relative; overflow:hidden; display:flex; flex-direction:column; transition:transform .26s,border-color .26s, box-shadow .26s}
+    .version-card:before {content:""; position:absolute; top:0; left:0; width:65px; height:2px; background:var(--cyan); box-shadow:0 0 16px rgba(66,236,245,.5)}
+    .version-card:after {content:""; position:absolute; right:-16px; top:23px; width:74px; height:74px; border:1px solid rgba(66,236,245,.1); transform:rotate(45deg); pointer-events:none}
+    .version-card:hover {transform:translateY(-7px); border-color:rgba(66,236,245,.47); box-shadow:0 18px 40px rgba(0,0,0,.3)}
+    .version-card-top {display:flex; align-items:center; justify-content:space-between; gap:7px; margin-bottom:26px}
+    .version-num {font-size:10px; letter-spacing:.14em; font-weight:850; color:#687c96}
+    .version-dot {font-size:9px; font-weight:900; color:#8bf2bd; letter-spacing:.1em; display:flex; gap:7px; align-items:center}
+    .version-dot:before {content:""; width:5px; height:5px; border-radius:50%; background:#8bf2bd; box-shadow:0 0 11px #8bf2bd}
+    .version-label {font:900 49px/.95 var(--display); letter-spacing:-.055em; margin:0 0 9px}
+    .version-caption {font-size:10px; color:#8291a8; letter-spacing:.11em; font-weight:750; text-transform:uppercase; margin-bottom:22px}
+    .download-btn {margin-top:auto; border:1px solid rgba(66,236,245,.45); background:rgba(66,236,245,.07); color:var(--cyan); min-height:43px; padding:8px 11px; width:100%; font-size:12px; letter-spacing:.06em; font-weight:900; display:flex; align-items:center; justify-content:center; gap:10px; transition:background .18s,color .18s,border-color .18s}
+    .download-btn:hover {background:var(--cyan); color:#081620; border-color:var(--cyan)}
+    .download-btn svg {width:15px; height:15px; flex-shrink:0}
+    .nxy-grid {display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px}
+    .nxy-card {min-height:211px; padding:26px 30px; position:relative; overflow:hidden; border:1px solid rgba(245,187,107,.21); background:linear-gradient(117deg,#201a24,#161623 61%,#171a23); display:flex; align-items:center; justify-content:space-between; gap:20px; transition:border-color .25s, transform .25s}
+    .nxy-card:hover {border-color:rgba(255,170,83,.65); transform:translateY(-5px)}
+    .nxy-card:after {content:""; position:absolute; height:200px; width:200px; border:1px solid rgba(245,187,107,.13); border-radius:50%; right:-87px; top:-68px; box-shadow:0 0 0 30px rgba(245,187,107,.025), 0 0 0 64px rgba(245,187,107,.015); pointer-events:none}
+    .nxy-edition {font-size:10px; color:var(--gold); font-weight:900; letter-spacing:.22em; text-transform:uppercase}
+    .nxy-number {font:900 55px/1 var(--display); margin:15px 0 9px; letter-spacing:-.045em}
+    .nxy-platform {font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#a6a1ae}
+    .nxy-action {z-index:1; align-self:flex-end; white-space:nowrap; min-height:47px; padding:0 16px; background:var(--gold); color:#20130b; border:0; font-size:11px; font-weight:900; display:flex; align-items:center; gap:10px; transition:background .2s}
+    .nxy-action:hover {background:#ffe0aa}
+    .nxy-action svg {width:16px; height:16px}
+    .footnote {margin:38px 0 0; border:1px solid #283346; border-left:3px solid var(--cyan); background:rgba(27,36,56,.26); padding:18px 22px; display:flex; align-items:flex-start; gap:14px; color:#90a3b9; font-size:12px; line-height:1.75}
+    .footnote svg {width:18px; height:18px; stroke:var(--cyan); flex:none; margin-top:1px}
+    .outro {overflow:hidden; position:relative; padding:55px 0; background:linear-gradient(110deg,#10202e,#162036 56%,#291a31); border-top:1px solid #2f425a; border-bottom:1px solid #2b3346}
+    .outro::after {content:"3DX+"; position:absolute; right:-15px; top:-51px; font:900 225px var(--display); letter-spacing:-.07em; color:#ffffff08; pointer-events:none}
+    .outro-inner {position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:24px}
+    .outro h2 {font:900 clamp(30px,4vw,48px)/1.07 var(--display); margin:0 0 10px}
+    .outro p {font-size:12px; color:#a2b0c9; margin:0; line-height:1.65}
+    .outro-tag {white-space:nowrap; font:900 11px var(--font); color:var(--cyan); letter-spacing:.19em; border:1px solid #3a6e83; padding:16px 20px}
+    .footer {padding:27px 0 35px; background:#090b12}
+    .footer-inner {display:flex; align-items:center; justify-content:space-between; gap:20px; color:#647085; font-size:10px; font-weight:700; letter-spacing:.08em}
+    .footer-brand {color:#99aebf; font-size:13px; font-weight:950}
+    .footer-brand b {color:var(--cyan)}
+    .experience {position:fixed; inset:0; z-index:1000; width:100%; height:100%; height:100dvh; background:radial-gradient(ellipse at 50% 30%,#182c42 0%,#070911 65%); overflow-y:auto; overscroll-behavior:contain; display:flex; align-items:center; justify-content:center; padding:24px}
+    .experience:before {content:""; position:fixed; inset:0; pointer-events:none; opacity:.21; background-image:linear-gradient(rgba(72,116,150,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(72,116,150,.2) 1px,transparent 1px); background-size:56px 56px; mask-image:linear-gradient(transparent,black)}
+    .exp-panel {position:relative; width:min(960px,100%); z-index:1; margin:auto}
+    .exp-bar {display:flex; align-items:center; justify-content:space-between; gap:15px; padding:10px 0 23px; border-bottom:1px solid rgba(142,191,215,.18); margin-bottom:23px}
+    .exp-logo {font-size:15px; font-weight:1000; letter-spacing:.06em}
+    .exp-logo b {color:var(--cyan)}
+    .exp-steps {display:flex; gap:8px; font:850 10px var(--font); letter-spacing:.12em; color:#61788f}
+    .exp-steps span {display:inline-grid; place-items:center; width:35px; height:29px; border:1px solid #2f3849; background:#101b2a}
+    .exp-steps span.active {color:#061922; background:var(--cyan); border-color:var(--cyan)}
+    .exp-step {display:flex; gap:12px; align-items:center; font-size:10px; color:#b0bdcc; letter-spacing:.15em; font-weight:750; margin-bottom:12px; text-transform:uppercase}
+    .exp-step:before {content:""; width:6px; height:6px; background:var(--pink); box-shadow:0 0 12px var(--pink)}
+    .exp-title {font:900 clamp(30px,5vw,51px)/1.08 var(--display); letter-spacing:-.015em; margin:0 0 8px}
+    .exp-subtitle {font-size:13px; color:#a1b1c9; margin:0 0 21px; line-height:1.6}
+    .ad-layout {border:1px solid #3c5166; box-shadow:0 28px 100px #0009; background:#06080e; overflow:hidden}
+    .ad-film {position:relative; width:100%; aspect-ratio:16/9; background:#030407; overflow:hidden}
+    #ad-video {display:block; width:100%; height:100%; object-fit:contain; background:#030407; pointer-events:none; user-select:none}
+    .ad-corner {position:absolute; z-index:2; top:17px; left:17px; border:1px solid rgba(240,248,255,.7); background:rgba(0,0,0,.66); backdrop-filter:blur(5px); padding:7px 10px; color:#f7fbff; font-size:9px; letter-spacing:.19em; font-weight:950; pointer-events:none}
+    .ad-brand-stamp {position:absolute; z-index:2; right:20px; bottom:19px; border-right:3px solid var(--pink); background:rgba(5,10,17,.58); padding:7px 12px; text-align:right; color:#fff; font-size:13px; letter-spacing:.11em; font-weight:900; pointer-events:none; text-shadow:0 2px 10px #000}
+    .ad-brand-stamp small {display:block; margin-top:4px; font-size:8px; color:#cee5ef; letter-spacing:.2em}
+    .ad-playgate {position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:15px; background:rgba(3,7,17,.7); backdrop-filter:blur(8px); z-index:5}
+    .ad-playgate .play-round {width:75px; height:75px; border:2px solid var(--cyan); border-radius:50%; display:grid; place-items:center; box-shadow:0 0 45px #42ecf54d; background:#0a2933; color:var(--cyan)}
+    .ad-playgate svg {width:30px;height:30px}
+    .ad-playgate p {margin:0; color:#e6fdff; font-size:13px; font-weight:750; letter-spacing:.035em; text-align:center; padding:0 12px}
+    .ad-bottom {padding:19px 22px 16px; background:#121927}
+    .ad-bottom-top {display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:13px}
+    .ad-brand {font-weight:950; letter-spacing:.1em; font-size:14px}
+    .ad-brand span {color:var(--cyan)}
+    .ad-bottom-meta {display:flex; align-items:center; gap:12px}
+    .ad-time {white-space:nowrap; color:#c7d6e8; font-variant-numeric:tabular-nums; font-size:12px; font-weight:850}
+    .sound-btn {border:1px solid #3b4c63; padding:8px 11px; background:#1d293c; color:#dbe8f4; font-size:11px; font-weight:800; min-width:70px}
+    .sound-btn:hover {border-color:var(--cyan)}
+    .ad-track {height:5px; background:#28384d; overflow:hidden; margin-bottom:12px}
+    .ad-fill {width:0%; height:100%; background:linear-gradient(90deg,#3c8dff,var(--cyan)); box-shadow:0 0 13px var(--cyan); transition:width .14s linear}
+    .ad-disclaimer {font-size:11px; color:#849bb4; display:flex; gap:8px; align-items:center; justify-content:space-between; line-height:1.6}
+    .ad-disclaimer strong {color:#ff9cbc; font-size:10px; letter-spacing:.09em}
+    .load-stage, .reveal-stage {min-height:550px; border:1px solid #283d55; background:radial-gradient(circle at 50% 40%,rgba(22,70,93,.26),transparent 42%),rgba(8,13,23,.82); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:35px 25px; position:relative; overflow:hidden}
+    .load-stage:before, .reveal-stage:before {content:""; position:absolute; inset:12px; border:1px solid rgba(78,127,163,.12); pointer-events:none}
+    .loading-ring {width:150px; height:150px; border:2px solid #23435b; border-top-color:var(--cyan); border-radius:50%; display:grid; place-items:center; box-shadow:0 0 45px #42ecf51c; position:relative; margin-bottom:31px; animation:rotate-rim 1.65s linear infinite}
+    .loading-ring:before {content:""; position:absolute; inset:13px; border:2px dashed rgba(86,202,225,.26); border-radius:50%}
+    .loading-percent {font:900 53px var(--display); letter-spacing:-.05em; animation:counter-rotation 1.65s linear infinite}
+    .loading-percent small {font:850 13px var(--font); color:var(--cyan); margin-left:1px}
+    .loading-title {font:900 clamp(29px,5vw,45px)/1.15 var(--display); margin:0 0 10px}
+    .loading-phase {font-size:12px; color:#b0bbcd; min-height:20px}
+    .load-progress {width:min(460px,80%); height:6px; background:#263d54; margin:29px 0 18px; overflow:hidden}
+    .load-progress div {width:0%;height:100%;background:var(--cyan); box-shadow:0 0 22px var(--cyan)}
+    .loading-file {font-size:10px; color:#5f8098; letter-spacing:.2em; text-transform:uppercase}
+    .reveal-burst {width:110px; height:110px; border:2px solid var(--pink); box-shadow:0 0 0 15px #ff5d910a,0 0 0 33px #ff5d9105,0 0 55px #ff5d9136; border-radius:50%; display:grid; place-items:center; font:950 70px var(--display); color:var(--pink); transform:rotate(-15deg); margin-bottom:37px}
+    .reveal-kicker {font-size:11px; letter-spacing:.3em; color:var(--pink); font-weight:850; margin:0 0 18px}
+    .reveal-title {font:900 clamp(37px,5.4vw,71px)/1.2 var(--font); letter-spacing:-.025em; margin:0 0 20px; text-wrap:balance; color:#fdfaff; max-width:760px}
+    .reveal-title .em {color:var(--pink)}
+    .reveal-description {font-size:14px; color:#aab8cd; margin:0 0 32px; max-width:510px; line-height:1.8}
+    .return-btn {border:1px solid rgba(66,236,245,.65); background:rgba(66,236,245,.10); color:var(--cyan); padding:16px 25px; font-size:12px; font-weight:900; letter-spacing:.12em; transition:.2s}
+    .return-btn:hover {background:var(--cyan);color:#071620}
+    .reveal-foot {position:absolute; bottom:21px; font-size:10px; letter-spacing:.2em; color:#607a92; font-weight:800}
+    @keyframes levitate {0%,100% {translate:0 0} 50% {translate:0 -13px}}
+    @keyframes rotate-rim {to {rotate:360deg}}
+    @keyframes counter-rotation {to {rotate:-360deg}}
+    @keyframes marquee {to {transform:translateX(-50%)}}
+    @media(max-width:1100px) {
+      .hero-title {font-size:clamp(75px,9vw,113px)}
+      .hero-art {transform:scale(.86); margin:-35px}
+      .art-chip-a {left:2%}
+      .version-grid {gap:12px}
+      .version-card {padding:20px 16px}
+      .nxy-card {padding:24px 20px}
+    }
+    @media(max-width:800px) {
+      .wrap {width:min(100% - 36px,680px)}
+      .site-header {height:70px}
+      .header-nav {display:none}
+      .hero-inner {min-height:auto; grid-template-columns:1fr; gap:0; padding-top:75px; padding-bottom:70px}
+      .hero {min-height:auto}
+      .hero-content {max-width:650px}
+      .hero-title {font-size:clamp(76px,13vw,120px)}
+      .hero-description {max-width:580px}
+      .hero-art {min-height:450px; max-height:480px; transform:scale(.9); margin:0 auto -15px; width:min(530px,100%)}
+      .hero-bottom {position:relative; height:55px}
+      .version-grid {grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px}
+      .version-card {padding:22px; min-height:223px}
+      .nxy-grid {grid-template-columns:1fr}
+      .nxy-card {min-height:185px}
+      .releases {padding:80px 0}
+      .section-counter {display:none}
+    }
+    @media(max-width:520px) {
+      .wrap {width:calc(100% - 36px)}
+      .site-header {height:64px}
+      .brand-mark {width:32px;height:32px;font-size:16px}
+      .brand-title {font-size:14px}
+      .brand-sub {font-size:7px}
+      .lang-control {min-height:37px;padding:0 10px;gap:6px}
+      .lang-control select {font-size:10px;max-width:94px}
+      .lang-control svg {width:13px}
+      .hero-inner {padding-top:65px;padding-bottom:30px}
+      .eyebrow {letter-spacing:.16em;font-size:10px}
+      .hero-title {font-size:clamp(64px,17vw,99px);margin:28px 0 20px}
+      .hero-title .second {-webkit-text-stroke:1.5px #fff}
+      .hero-tagline {font-size:22px}
+      .hero-description {font-size:13px}
+      .hero-actions {gap:17px}
+      .primary-cta {min-height:51px;width:100%}
+      .hero-art {width:100%; min-height:340px; max-height:350px; transform:scale(.68); transform-origin:center center; margin:-30px auto -30px}
+      .art-chip-a {left:-15%}
+      .art-chip-b {right:-14%}
+      .hero-bottom {font-size:8px;letter-spacing:.08em}
+      .hero-bottom .bars {display:none}
+      .releases {padding:63px 0}
+      .section-heading {font-size:46px}
+      .section-top {margin-bottom:39px}
+      .group-head {align-items:stretch;flex-direction:column;gap:22px}
+      .group-name {font-size:28px}
+      .group-type {font-size:8px}
+      .device-tabs {width:100%}
+      .device-tab {flex:1}
+      .version-grid {gap:10px}
+      .version-card {min-height:212px;padding:18px 14px 15px}
+      .version-card-top {margin-bottom:25px}
+      .version-dot {font-size:8px}
+      .version-label {font-size:42px}
+      .version-caption {font-size:9px}
+      .download-btn {font-size:11px;padding:8px 6px;gap:5px}
+      .nxy-card {padding:21px 17px;gap:8px;min-height:180px}
+      .nxy-number {font-size:49px}
+      .nxy-action {padding:0 11px;font-size:10px;min-height:43px}
+      .outro-inner {align-items:flex-start; flex-direction:column}
+      .outro-tag {font-size:10px;padding:12px 15px}
+      .footer-inner {flex-direction:column;align-items:flex-start;gap:9px;line-height:1.6}
+      .experience {padding:13px 14px}
+      .exp-bar {padding:10px 0 17px;margin-bottom:18px}
+      .exp-logo {font-size:13px}
+      .exp-title {font-size:30px}
+      .exp-subtitle {font-size:11px;margin-bottom:15px}
+      .ad-corner {top:8px;left:8px;padding:5px 7px;font-size:7px}
+      .ad-brand-stamp {bottom:9px;right:9px;font-size:8px;padding:5px 7px}
+      .ad-brand-stamp small {font-size:6px}
+      .ad-bottom {padding:16px 14px 13px}
+      .ad-brand {font-size:11px}
+      .ad-time {font-size:10px}
+      .sound-btn {min-width:55px;padding:7px 6px;font-size:10px}
+      .ad-disclaimer {font-size:9px;gap:6px;align-items:flex-start}
+      .ad-disclaimer strong {font-size:9px;min-width:79px;text-align:right}
+      .load-stage,.reveal-stage {min-height:460px}
+      .reveal-title {font-size:clamp(31px,8vw,46px)}
+      .reveal-description {font-size:12px}
+      .reveal-burst {width:89px;height:89px;font-size:54px}
+    }
+    @media(max-height:660px) and (min-width:800px) {.experience {align-items:flex-start}.exp-panel {margin:12px auto}.ad-film {max-height:53vh}.ad-film video {height:100%}}
+    @media(prefers-reduced-motion:reduce) {html{scroll-behavior:auto}*,*::before,*::after {animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+  </style>
+</head>
+<body>
+  <div class="site-noise" aria-hidden="true"></div>
+  <div class="top-accent"></div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="WMMT3DX+ homepage">
+        <div class="brand-mark" aria-hidden="true">W</div>
+        <div class="brand-copy"><div class="brand-title">WMMT<span>3DX+</span></div><div class="brand-sub">MOBILE ARCHIVE</div></div>
+      </a>
+      <nav class="header-nav" aria-label="Navigation">
+        <a href="#versions" data-i18n="navVersions">VERSIONS</a>
+        <a href="#allannn" data-i18n="navAllannn">ALLANNN-SUDO</a>
+        <a href="#nxy" data-i18n="navNxy">NXY EDITION</a>
+      </nav>
+      <label class="lang-control">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke-width="1.7"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c-5 5-5 13 0 18M12 3c5 5 5 13 0 18"></path></svg>
+        <select id="language-select" aria-label="Language">
+          <option value="zh">繁體中文</option><option value="en">English</option><option value="ja">日本語</option><option value="id">Indonesia</option><option value="fil">Filipino</option>
+        </select>
+        <span class="select-caret" aria-hidden="true">⌄</span>
+      </label>
+    </div>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-content">
+          <div class="eyebrow" data-i18n="heroEyebrow">THE UNDERGROUND MOBILE ARCHIVE</div>
+          <h1 class="hero-title"><span>WMMT</span><span class="second">3DX<span class="plus">+</span></span></h1>
+          <h2 class="hero-tagline" data-i18n="heroTagline">傳說級街機競速，現在掌握在你手中。</h2>
+          <p class="hero-description" data-i18n="heroDescription">深入午夜街道，探索 Allannn-sudo 與 Nxy 的行動版本。選擇平台、找到版本，準備好啟動你的下一段旅程。</p>
+          <div class="hero-actions">
+            <a class="primary-cta" href="#versions"><span data-i18n="explore">探索下載版本</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+            <div class="hero-hint" data-i18n="heroHint">ANDROID + IOS READY</div>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-halo"></div><div class="speed-arc"></div><div class="side-number">03</div>
+          <div class="device"><div class="device-screen"><div class="night-city"></div><div class="road"></div><div class="horizon"></div><div class="device-topline">MIDNIGHT EXPRESSWAY // 03</div><div class="device-speed">300<small>KM / H</small></div><div class="device-footer"><span>WMMT 3DX+</span><span>LIVE THE NIGHT</span></div></div><div class="device-notch"></div></div>
+          <div class="art-chip art-chip-a"><small>MAX SPEED</small><strong>300 <span style="font-size:13px">KM/H</span></strong></div>
+          <div class="art-chip art-chip-b"><small>RACING SPIRIT</small><strong>∞ BOOST</strong></div>
+        </div>
+        <div class="hero-bottom"><span><b>///</b> <span data-i18n="heroBottom">MIDNIGHT ACCESS POINT</span></span><span class="bars">▮▯▮▮▯▮▯▮▮▮</span><span>EST. 2026 <b>●</b> ONLINE</span></div>
+      </div>
+    </section>
+    <div class="ticker" aria-hidden="true"><div class="ticker-text">WMMT 3DX+ <span class="star">✦</span> ALLANNN-SUDO <span class="star">✦</span> ANDROID / IOS <span class="star">✦</span> NXY EDITION <span class="star">✦</span> NIGHT RUNNER <span class="star">✦</span> WMMT 3DX+ <span class="star">✦</span> ALLANNN-SUDO <span class="star">✦</span> ANDROID / IOS <span class="star">✦</span> NXY EDITION <span class="star">✦</span> NIGHT RUNNER <span class="star">✦</span></div></div>
+    <section class="releases" id="versions">
+      <div class="wrap">
+        <div class="section-top">
+          <div><span class="section-kicker" data-i18n="sectionKicker">/// THE DOWNLOAD TERMINAL</span><h2 class="section-heading"><span data-i18n="sectionHeading1">選擇你的</span> <em data-i18n="sectionHeading2">版本</em></h2><p class="section-desc" data-i18n="sectionDesc">兩個版本系列，多種發行版本。選擇你的行動平台，開始進入午夜極速世界。</p></div>
+          <span class="section-counter" aria-hidden="true">01—02</span>
+        </div>
+        <div class="release-group" id="allannn">
+          <div class="group-head">
+            <div class="group-heading"><span class="group-no">01</span><h3 class="group-name">Allannn-sudo</h3><span class="group-type" data-i18n="groupLabel">MOBILE EDITION</span></div>
+            <div class="device-tabs" role="group" aria-label="Choose platform"><button class="device-tab active" id="tab-android" type="button" aria-pressed="true" data-platform-tab="Android">◉ ANDROID</button><button class="device-tab" id="tab-ios" type="button" aria-pressed="false" data-platform-tab="iOS">◉ IOS</button></div>
+          </div>
+          <div class="version-grid" id="allannn-grid">
+            <article class="version-card" data-v="1.22"><div class="version-card-top"><span class="version-num">RELEASE 001</span><span class="version-dot" data-i18n="available">AVAILABLE</span></div><h4 class="version-label">V1.22</h4><div class="version-caption" data-package-label>ANDROID / APK EDITION</div><button type="button" class="download-btn" data-channel="Allannn-sudo" data-version="1.22" data-platform="Android"><span data-button-text>V1.22 下載</span><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></svg></button></article>
+            <article class="version-card" data-v="1.24"><div class="version-card-top"><span class="version-num">RELEASE 002</span><span class="version-dot" data-i18n="available">AVAILABLE</span></div><h4 class="version-label">V1.24</h4><div class="version-caption" data-package-label>ANDROID / APK EDITION</div><button type="button" class="download-btn" data-channel="Allannn-sudo" data-version="1.24" data-platform="Android"><span data-button-text>V1.24 下載</span><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></svg></button></article>
+            <article class="version-card" data-v="1.29"><div class="version-card-top"><span class="version-num">RELEASE 003</span><span class="version-dot" data-i18n="available">AVAILABLE</span></div><h4 class="version-label">V1.29</h4><div class="version-caption" data-package-label>ANDROID / APK EDITION</div><button type="button" class="download-btn" data-channel="Allannn-sudo" data-version="1.29" data-platform="Android"><span data-button-text>V1.29 下載</span><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></svg></button></article>
+            <article class="version-card" data-v="1.33"><div class="version-card-top"><span class="version-num">RELEASE 004</span><span class="version-dot" data-i18n="available">AVAILABLE</span></div><h4 class="version-label">V1.33</h4><div class="version-caption" data-package-label>ANDROID / APK EDITION</div><button type="button" class="download-btn" data-channel="Allannn-sudo" data-version="1.33" data-platform="Android"><span data-button-text>V1.33 下載</span><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></svg></button></article>
+          </div>
+        </div>
+        <div class="release-group" id="nxy" style="margin-bottom:0">
+          <div class="group-head"><div class="group-heading"><span class="group-no" style="color:var(--gold);border-color:#8c6745">02</span><h3 class="group-name">Nxy</h3><span class="group-type" data-i18n="groupLabel">MOBILE EDITION</span></div></div>
+          <div class="nxy-grid">
+            <article class="nxy-card"><div><div class="nxy-edition">NXY // SPECIAL RELEASE</div><h4 class="nxy-number">V1.7.2</h4><div class="nxy-platform">● IOS EDITION</div></div><button type="button" class="nxy-action" data-channel="Nxy" data-version="1.7.2" data-platform="iOS"><span data-button-text>1.7.2 IOS 下載</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></svg></button></article>
+            <article class="nxy-card"><div><div class="nxy-edition">NXY // SPECIAL RELEASE</div><h4 class="nxy-number">V1.7.4</h4><div class="nxy-platform">● ANDROID EDITION</div></div><button type="button" class="nxy-action" data-channel="Nxy" data-version="1.7.4" data-platform="Android"><span data-button-text>1.7.4 Android 下載</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></svg></button></article>
+          </div>
+        </div>
+        <div class="footnote"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 10v6m0-9v1"/></svg><span data-i18n="note">這是非官方的粉絲製作互動體驗頁面。本站不隸屬於原遊戲開發商或發行商。</span></div>
+      </div>
+    </section>
+    <section class="outro"><div class="wrap outro-inner"><div><h2 data-i18n="outroTitle">午夜競速，永不結束。</h2><p data-i18n="outroDesc">選好你的版本，按下開始。真正的挑戰現在才開始。</p></div><div class="outro-tag">CHASE THE NIGHT / 3DX+</div></div></section>
+  </main>
+  <footer class="footer"><div class="wrap footer-inner"><div class="footer-brand">WMMT<b>3DX+</b> <span style="color:#465871;font-size:10px;letter-spacing:.15em;margin-left:12px">MOBILE ARCHIVE</span></div><div data-i18n="footerNotice">FAN-MADE INTERACTIVE EXPERIENCE • NOT AN OFFICIAL GAME DOWNLOAD</div><div>© 2026 • NIGHT RUN</div></div></footer>
+  <div class="experience" id="experience" role="dialog" aria-modal="true" aria-labelledby="experience-title" hidden>
+    <div class="exp-panel">
+      <div class="exp-bar"><div class="exp-logo">WMMT<b>3DX+</b> <span style="font-size:9px;letter-spacing:.14em;color:#798ca6;margin-left:8px">/ TERMINAL</span></div><div class="exp-steps" aria-label="Progress"><span id="step1" class="active">01</span><span id="step2">02</span><span id="step3">03</span></div></div>
+      <div id="stage-ad">
+        <div class="exp-step" data-i18n="adStep">STEP 01 / SPONSORED CONTENT</div><h2 class="exp-title" id="experience-title" data-i18n="adTitle">下載準備中，先看一段精彩內容。</h2><p class="exp-subtitle" id="selected-edition">Allannn-sudo • V1.22 • Android</p>
+        <div class="ad-layout">
+          <div class="ad-film"><video id="ad-video" playsinline webkit-playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-label="Advertisement video"><source src="assets/ad-video.mp4" type="video/mp4"></video><div class="ad-corner" data-i18n="adLabel">ADVERTISEMENT / 廣告</div><div class="ad-brand-stamp">MIDNIGHT DRIVE<small>THE CITY NEVER STOPS</small></div><button type="button" class="ad-playgate" id="ad-playgate" hidden><span class="play-round"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m8 4 12 8-12 8V4Z"/></svg></span><p data-i18n="tapPlay">點擊播放影片以繼續</p></button></div>
+          <div class="ad-bottom"><div class="ad-bottom-top"><div class="ad-brand">MIDNIGHT <span>DRIVE</span></div><div class="ad-bottom-meta"><span class="ad-time" id="ad-time">03:33 / 03:33</span><button id="sound-toggle" type="button" class="sound-btn" data-i18n="unmute">開啟聲音</button></div></div><div class="ad-track"><div id="ad-fill" class="ad-fill"></div></div><div class="ad-disclaimer"><span data-i18n="adMessage">影片播放完畢後將自動繼續。</span><strong data-i18n="noSkip">不可略過</strong></div></div>
+        </div>
+      </div>
+      <div id="stage-loading" hidden><div class="exp-step" data-i18n="loadStep">STEP 02 / INITIALIZING PACKAGE</div><div class="load-stage"><div class="loading-ring"><span class="loading-percent"><span id="loading-count">0</span><small>%</small></span></div><h2 class="loading-title" id="loading-title" data-i18n="loadingTitle">正在準備下載檔案</h2><p class="loading-phase" id="loading-phase" aria-live="polite"></p><div class="load-progress"><div id="loading-fill"></div></div><div class="loading-file" id="loading-file">PACKET // LOADING</div></div></div>
+      <div id="stage-reveal" hidden><div class="exp-step" data-i18n="revealStep">STEP 03 / REQUEST COMPLETE</div><div class="reveal-stage"><div class="reveal-burst">!</div><p class="reveal-kicker" data-i18n="revealKicker">SURPRISE // 404</p><h2 class="reveal-title" id="reveal-title" data-i18n="revealTitle">還想要貪？拿不到的</h2><p class="reveal-description" data-i18n="revealDesc">恭喜，你完整看完了廣告！但這是一個整人下載頁面，這裡沒有真正的遊戲檔案。😏</p><button class="return-btn" id="return-btn" type="button" data-i18n="return">← 返回版本列表</button><div class="reveal-foot">WMMT3DX+ / ACCESS DENIED / NIGHT RUN</div></div></div>
+    </div>
+  </div>
+  <script>
+  (() => {
+    'use strict';
+    const copy = {
+      zh: {
+        navVersions:'版本列表',navAllannn:'ALLANNN-SUDO',navNxy:'NXY 版本',
+        heroEyebrow:'/// 午夜街機行動資料庫',heroTagline:'傳說級街機競速，現在掌握在你手中。',heroDescription:'深入午夜街道，探索 Allannn-sudo 與 Nxy 的行動版本。選擇平台、找到版本，準備好啟動你的下一段旅程。',explore:'探索下載版本',heroHint:'ANDROID + IOS 平台',heroBottom:'午夜極速存取站',
+        sectionKicker:'/// 版本下載終端',sectionHeading1:'選擇你的',sectionHeading2:'版本',sectionDesc:'兩個版本系列、多種發行版本。選擇你的行動平台，開始進入午夜極速世界。',groupLabel:'行動版',available:'可使用',download:'下載',note:'這是非官方的粉絲製作互動體驗頁面。本站不隸屬於原遊戲開發商或發行商。',
+        outroTitle:'午夜競速，永不結束。',outroDesc:'選好你的版本，按下開始。真正的挑戰現在才開始。',footerNotice:'非官方粉絲互動體驗 • 非正式遊戲下載',
+        adStep:'階段 01 / 贊助影片',adTitle:'下載準備中，先看一段精彩內容。',adLabel:'ADVERTISEMENT / 廣告',tapPlay:'點擊播放影片以繼續',adMessage:'影片播放完畢後將自動繼續。',noSkip:'不可略過',mute:'靜音',unmute:'開啟聲音',
+        loadStep:'階段 02 / 正在初始化',loadingTitle:'正在準備下載檔案',loadPhase1:'正在連線下載伺服器…',loadPhase2:'正在檢查版本資料…',loadPhase3:'正在驗證檔案完整性…',loadPhase4:'正在完成最後步驟…',
+        revealStep:'階段 03 / 請求完成',revealKicker:'SURPRISE // 404',revealTitle:'還想要貪？拿不到的',revealDesc:'恭喜，你完整看完了廣告！但這是一個整人下載頁面，這裡沒有真正的遊戲檔案。😏',return:'← 返回版本列表',error:'影片無法載入，請確認 ad-video.mp4 已放在 assets 資料夾，然後重新整理網頁。'
+      },
+      en: {
+        navVersions:'VERSIONS',navAllannn:'ALLANNN-SUDO',navNxy:'NXY EDITION',
+        heroEyebrow:'/// THE UNDERGROUND MOBILE ARCHIVE',heroTagline:'Legendary arcade racing. Now in the palm of your hand.',heroDescription:'Enter the midnight streets and explore the Allannn-sudo and Nxy mobile editions. Pick your platform, choose a version, and get ready for the next run.',explore:'EXPLORE VERSIONS',heroHint:'ANDROID + IOS READY',heroBottom:'MIDNIGHT ACCESS POINT',
+        sectionKicker:'/// THE DOWNLOAD TERMINAL',sectionHeading1:'CHOOSE YOUR',sectionHeading2:'VERSION',sectionDesc:'Two editions, multiple releases. Select your mobile platform and enter the world of midnight speed.',groupLabel:'MOBILE EDITION',available:'AVAILABLE',download:'DOWNLOAD',note:'This is an unofficial fan-made interactive experience. Not affiliated with the original game developer or publisher.',
+        outroTitle:'THE NIGHT NEVER ENDS.',outroDesc:'Choose your version and hit start. The real challenge begins now.',footerNotice:'UNOFFICIAL FAN EXPERIENCE • NOT A REAL GAME DOWNLOAD',
+        adStep:'STEP 01 / SPONSORED CONTENT',adTitle:'Getting your download ready. Enjoy this feature.',adLabel:'ADVERTISEMENT / AD',tapPlay:'Tap to play the video and continue',adMessage:'Your experience will continue when the video ends.',noSkip:'NO SKIPPING',mute:'MUTE',unmute:'UNMUTE',
+        loadStep:'STEP 02 / INITIALIZING PACKAGE',loadingTitle:'PREPARING YOUR DOWNLOAD',loadPhase1:'Connecting to download server…',loadPhase2:'Checking release metadata…',loadPhase3:'Verifying file integrity…',loadPhase4:'Completing final steps…',
+        revealStep:'STEP 03 / REQUEST COMPLETE',revealKicker:'SURPRISE // 404',revealTitle:'Still being greedy? You’re not getting it.',revealDesc:'Congrats, you watched the whole ad! But this was a prank download page. No actual game files are available here. 😏',return:'← BACK TO VERSIONS',error:'Video failed to load. Check that ad-video.mp4 is in the assets folder and refresh.'
+      },
+      ja: {
+        navVersions:'バージョン',navAllannn:'ALLANNN-SUDO',navNxy:'NXY エディション',
+        heroEyebrow:'/// 深夜のモバイルアーカイブ',heroTagline:'伝説のアーケードレースを、その手の中に。',heroDescription:'真夜中のストリートへ。Allannn-sudo と Nxy のモバイル版をチェック。OSとバージョンを選び、次の走りに備えよう。',explore:'バージョンを見る',heroHint:'ANDROID + IOS 対応',heroBottom:'ミッドナイト・アクセスポイント',
+        sectionKicker:'/// ダウンロードターミナル',sectionHeading1:'好きな',sectionHeading2:'バージョンを選択',sectionDesc:'2つのエディションと複数のリリース。モバイルOSを選んで、真夜中のスピードの世界へ。',groupLabel:'モバイル版',available:'利用可能',download:'ダウンロード',note:'このサイトは非公式のファン制作インタラクティブページです。元のゲームの開発元・販売元とは関係ありません。',
+        outroTitle:'真夜中のレースは終わらない。',outroDesc:'バージョンを選んでスタート。真の挑戦はここから。',footerNotice:'非公式ファン体験 • 実際のゲーム配布ではありません',
+        adStep:'ステップ 01 / 広告コンテンツ',adTitle:'準備中です。まずは動画をご覧ください。',adLabel:'ADVERTISEMENT / 広告',tapPlay:'タップして動画を再生',adMessage:'動画の終了後、自動的に次へ進みます。',noSkip:'スキップ不可',mute:'ミュート',unmute:'音声オン',
+        loadStep:'ステップ 02 / ファイル準備中',loadingTitle:'ダウンロードを準備しています',loadPhase1:'サーバーに接続しています…',loadPhase2:'バージョン情報を確認中…',loadPhase3:'ファイルの整合性を確認中…',loadPhase4:'最終処理を実行中…',
+        revealStep:'ステップ 03 / 処理完了',revealKicker:'サプライズ // 404',revealTitle:'まだ欲張るの？ 手に入らないよ。',revealDesc:'広告を最後まで見てくれてありがとう！でもこれはドッキリ用のページ。実際のゲームファイルはありません。😏',return:'← バージョン一覧へ戻る',error:'動画を読み込めません。assets フォルダーに ad-video.mp4 があることを確認して再読み込みしてください。'
+      },
+      id: {
+        navVersions:'VERSI',navAllannn:'ALLANNN-SUDO',navNxy:'EDISI NXY',
+        heroEyebrow:'/// ARSIP MOBILE TENGAH MALAM',heroTagline:'Balapan arcade legendaris, kini dalam genggaman.',heroDescription:'Jelajahi jalanan malam dan temukan edisi mobile Allannn-sudo serta Nxy. Pilih platform, tentukan versi, dan bersiap untuk perjalanan berikutnya.',explore:'JELAJAHI VERSI',heroHint:'UNTUK ANDROID + IOS',heroBottom:'AKSES TENGAH MALAM',
+        sectionKicker:'/// TERMINAL UNDUHAN',sectionHeading1:'PILIH',sectionHeading2:'VERSIMU',sectionDesc:'Dua edisi dengan beragam rilis. Pilih platform mobile dan rasakan dunia kecepatan tengah malam.',groupLabel:'EDISI MOBILE',available:'TERSEDIA',download:'UNDUH',note:'Ini adalah pengalaman interaktif buatan penggemar, bukan situs resmi. Tidak berafiliasi dengan pengembang atau penerbit game asli.',
+        outroTitle:'MALAM TAK PERNAH USAI.',outroDesc:'Pilih versi dan tekan mulai. Tantangan sebenarnya baru dimulai.',footerNotice:'PENGALAMAN FAN NONRESMI • BUKAN UNDUHAN GAME ASLI',
+        adStep:'LANGKAH 01 / KONTEN SPONSOR',adTitle:'Unduhan sedang disiapkan. Nikmati video ini dulu.',adLabel:'ADVERTISEMENT / IKLAN',tapPlay:'Ketuk untuk memutar video dan lanjut',adMessage:'Proses akan dilanjutkan setelah video selesai.',noSkip:'TIDAK BISA DILEWATI',mute:'BISUKAN',unmute:'AKTIFKAN SUARA',
+        loadStep:'LANGKAH 02 / MENYIAPKAN BERKAS',loadingTitle:'MENYIAPKAN UNDUHAN',loadPhase1:'Menghubungkan ke server unduhan…',loadPhase2:'Memeriksa informasi versi…',loadPhase3:'Memverifikasi integritas berkas…',loadPhase4:'Menyelesaikan tahap akhir…',
+        revealStep:'LANGKAH 03 / PROSES SELESAI',revealKicker:'KEJUTAN // 404',revealTitle:'Masih serakah? Nggak bakal dapat!',revealDesc:'Selamat, kamu sudah menonton seluruh iklan! Tapi ini cuma halaman unduhan prank. Tidak ada berkas game sungguhan di sini. 😏',return:'← KEMBALI KE DAFTAR VERSI',error:'Video gagal dimuat. Pastikan ad-video.mp4 berada di folder assets, lalu muat ulang halaman.'
+      },
+      fil: {
+        navVersions:'MGA BERSYON',navAllannn:'ALLANNN-SUDO',navNxy:'NXY EDITION',
+        heroEyebrow:'/// MIDNIGHT MOBILE ARCHIVE',heroTagline:'Ang maalamat na arcade racing, nasa palad mo na.',heroDescription:'Pasukin ang mga lansangan sa hatinggabi at tingnan ang Allannn-sudo at Nxy mobile editions. Piliin ang platform at bersyon para sa susunod mong biyahe.',explore:'TINGNAN ANG MGA BERSYON',heroHint:'PARA SA ANDROID + IOS',heroBottom:'MIDNIGHT ACCESS POINT',
+        sectionKicker:'/// DOWNLOAD TERMINAL',sectionHeading1:'PILIIN ANG',sectionHeading2:'BERSYON MO',sectionDesc:'Dalawang edition at iba’t ibang release. Piliin ang mobile platform mo at pasukin ang mundo ng bilis sa gabi.',groupLabel:'MOBILE EDITION',available:'AVAILABLE',download:'I-DOWNLOAD',note:'Isa itong hindi opisyal na interactive page na ginawa ng mga fan. Hindi ito konektado sa orihinal na developer o publisher ng laro.',
+        outroTitle:'HINDI NATATAPOS ANG GABI.',outroDesc:'Piliin ang bersyon at pindutin ang simula. Nagsisimula pa lang ang totoong hamon.',footerNotice:'HINDI OPISYAL NA FAN EXPERIENCE • WALANG TOTOONG GAME DOWNLOAD',
+        adStep:'HAKBANG 01 / SPONSORED CONTENT',adTitle:'Inihahanda ang download mo. Panoorin muna ito.',adLabel:'ADVERTISEMENT / AD',tapPlay:'I-tap para panoorin ang video',adMessage:'Awtomatikong magpapatuloy pagkatapos ng video.',noSkip:'BAWAL I-SKIP',mute:'I-MUTE',unmute:'I-UNMUTE',
+        loadStep:'HAKBANG 02 / INIHahanda ANG FILE',loadingTitle:'INIHahanda ANG DOWNLOAD',loadPhase1:'Kumokonekta sa download server…',loadPhase2:'Sinusuri ang detalye ng bersyon…',loadPhase3:'Bine-verify ang file…',loadPhase4:'Tinatapos ang huling hakbang…',
+        revealStep:'HAKBANG 03 / TAPOS NA',revealKicker:'SURPRISE // 404',revealTitle:'Gusto mo pa? Wala kang makukuha!',revealDesc:'Congrats, napanood mo ang buong ad! Pero prank download page lang ito. Walang totoong game file rito. 😏',return:'← BALIK SA MGA BERSYON',error:'Hindi ma-load ang video. Tingnan kung nasa assets folder ang ad-video.mp4 at i-refresh ang page.'
+      }
+    };
+    const $ = id => document.getElementById(id);
+    const selector = $('language-select');
+    const experience = $('experience');
+    const video = $('ad-video');
+    const playGate = $('ad-playgate');
+    const soundToggle = $('sound-toggle');
+    const adTime = $('ad-time');
+    const adFill = $('ad-fill');
+    let lang = 'zh';
+    let platform = 'Android';
+    let stage = 'idle';
+    let request = null;
+    let loadTimer = null;
+    let lastAllowedTime = 0;
+    let lastFocus = null;
+    let lastTime = 0;
+
+    function t(k) { return (copy[lang] && copy[lang][k]) || copy.en[k] || k; }
+    function timeString(s) { if (!Number.isFinite(s) || s < 0) s=0; const v=Math.ceil(s); return `${String(Math.floor(v/60)).padStart(2,'0')}:${String(v%60).padStart(2,'0')}`; }
+    function syncTime() {
+      const duration = Number.isFinite(video.duration) ? video.duration : 213;
+      const current = Math.min(video.currentTime || 0, duration);
+      adFill.style.width = `${Math.max(0,Math.min(100, current / duration * 100))}%`;
+      adTime.textContent = `${timeString(Math.max(0,duration-current))} / ${timeString(duration)}`;
+    }
+    function setLang(v) {
+      lang=copy[v]?v:'zh';
+      selector.value=lang;
+      document.documentElement.lang={zh:'zh-Hant',en:'en',ja:'ja',id:'id',fil:'fil'}[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {el.textContent=t(el.dataset.i18n);});
+      document.querySelectorAll('[data-package-label]').forEach(el => {el.textContent = `${platform.toUpperCase()} / ${platform==='Android'?'APK':'IPA'} EDITION`;});
+      document.querySelectorAll('[data-button-text]').forEach(el => {const btn=el.closest('[data-version]'); if(!btn) return; const isNxy=btn.dataset.channel==='Nxy'; el.textContent = `${isNxy?'':'V'}${btn.dataset.version}${isNxy?' '+btn.dataset.platform:''} ${t('download')}`;});
+      if (request) $('selected-edition').textContent = `${request.channel}  •  V${request.version}  •  ${request.platform}`;
+      soundToggle.textContent=t(video.muted?'unmute':'mute');
+      if(stage==='loading') updateLoadText(lastTime);
+      try {localStorage.setItem('wmmt-lang',lang);} catch (_) {}
+    }
+    function setPlatform(value) {
+      platform=value;
+      document.querySelectorAll('[data-platform-tab]').forEach(btn => {const active=btn.dataset.platformTab===value;btn.classList.toggle('active',active);btn.setAttribute('aria-pressed',String(active));});
+      document.querySelectorAll('#allannn-grid .download-btn').forEach(btn => {btn.dataset.platform=value;});
+      setLang(lang);
+    }
+    function setStep(n) {
+      ['step1','step2','step3'].forEach((id,index) => $(id).classList.toggle('active',index===n-1));
+      $('stage-ad').hidden=n!==1; $('stage-loading').hidden=n!==2; $('stage-reveal').hidden=n!==3;
+    }
+    function updateLoadText(value) {
+      $('loading-phase').textContent=t(value<25?'loadPhase1':value<54?'loadPhase2':value<84?'loadPhase3':'loadPhase4');
+    }
+    function openExperience(button) {
+      if(stage!=='idle') return;
+      request={channel:button.dataset.channel,version:button.dataset.version,platform:button.dataset.platform};
+      lastFocus=document.activeElement;
+      $('selected-edition').textContent=`${request.channel}  •  V${request.version}  •  ${request.platform}`;
+      experience.hidden=false;
+      document.body.classList.add('locked');
+      setStep(1);stage='ad';
+      video.pause();
+      video.currentTime=0;
+      video.muted=false;
+      lastAllowedTime=0;
+      playGate.hidden=true;
+      soundToggle.textContent=t('mute');
+      syncTime();
+      // All downloads share the same full-length video. Only the actual ended event unlocks the next step.
+      const attempt=video.play();
+      if(attempt && typeof attempt.catch==='function') attempt.catch(()=> {if(stage==='ad') {video.muted=true; soundToggle.textContent=t('unmute');video.play().catch(()=>{playGate.hidden=false;});}});
+      soundToggle.focus({preventScroll:true});
+    }
+    function startLoading() {
+      if(stage!=='ad') return;
+      stage='loading';
+      video.pause();
+      setStep(2);
+      $('loading-count').textContent='0';$('loading-fill').style.width='0%';lastTime=0;updateLoadText(0);
+      $('loading-file').textContent=`${request.channel.toUpperCase()} / ${request.platform.toUpperCase()} / V${request.version}`;
+      const begin=performance.now();
+      const duration=6300;
+      function tick(now) {
+        if(stage!=='loading') return;
+        const raw=Math.min(1,(now-begin)/duration);
+        let p;
+        if (raw<.78) p=raw/.78*89;
+        else p=89+((raw-.78)/.22)*11;
+        const value=Math.min(100,Math.floor(p));
+        lastTime=value;
+        $('loading-count').textContent=String(value);
+        $('loading-fill').style.width=`${p}%`;
+        updateLoadText(value);
+        if(raw<1) loadTimer=requestAnimationFrame(tick); else showReveal();
+      }
+      loadTimer=requestAnimationFrame(tick);
+    }
+    function showReveal() {
+      if(stage!=='loading') return;
+      stage='reveal';setStep(3);$('return-btn').focus({preventScroll:true});
+    }
+    function closeExperience() {
+      if(stage!=='reveal') return; // No skipping or early closing during the ad or loading sequence.
+      stage='idle';experience.hidden=true;document.body.classList.remove('locked');
+      video.pause();video.currentTime=0;lastAllowedTime=0;
+      if(loadTimer) cancelAnimationFrame(loadTimer);
+      request=null;
+      if(lastFocus && typeof lastFocus.focus==='function') lastFocus.focus({preventScroll:true});
+    }
+    document.querySelectorAll('[data-platform-tab]').forEach(btn => btn.addEventListener('click',()=>setPlatform(btn.dataset.platformTab)));
+    document.querySelectorAll('[data-version][data-channel]').forEach(btn => btn.addEventListener('click',()=>openExperience(btn)));
+    selector.addEventListener('change', e => setLang(e.target.value));
+    soundToggle.addEventListener('click',()=>{video.muted=!video.muted;soundToggle.textContent=t(video.muted?'unmute':'mute');});
+    playGate.addEventListener('click',()=>{playGate.hidden=true;video.play().catch(()=>{playGate.hidden=false;});});
+    video.addEventListener('loadedmetadata',syncTime);
+    video.addEventListener('timeupdate',()=>{if(stage==='ad') {lastAllowedTime=video.currentTime;syncTime();}});
+    video.addEventListener('seeking',()=>{if(stage==='ad' && Math.abs(video.currentTime-lastAllowedTime)>1.25) {video.currentTime=lastAllowedTime;}});
+    video.addEventListener('pause',()=>{if(stage==='ad' && !video.ended && !playGate.hidden) return; if(stage==='ad' && !video.ended) {const a=video.play();if(a) a.catch(()=>{playGate.hidden=false;});}});
+    video.addEventListener('ended',startLoading);
+    video.addEventListener('error',()=>{if(stage==='ad'){playGate.hidden=false;playGate.querySelector('p').textContent=t('error');}});
+    $('return-btn').addEventListener('click',closeExperience);
+    document.addEventListener('keydown',e=> {if(stage!=='idle' && e.key==='Escape') {e.preventDefault();e.stopPropagation();}});
+    // Select a matching language on first visit, with a manual override retained on subsequent visits.
+    let saved='';try{saved=localStorage.getItem('wmmt-lang')||'';}catch(_){}
+    const browser=(navigator.language||'').toLowerCase();
+    const initial=saved&&copy[saved]?saved:browser.startsWith('ja')?'ja':browser.startsWith('id')?'id':browser.startsWith('fil')||browser.startsWith('tl')?'fil':browser.startsWith('zh')?'zh':'en';
+    setLang(initial);
+    setPlatform('Android');
+  })();
+  </script>
+</body>
+</html>
